@@ -1,5 +1,5 @@
-import * as types from '../constants/ActionTypes'
-import * as actions from './index'
+import * as types from '../../src/constants/ActionTypes'
+import * as actions from '../../src/actions/index'
 
 describe('todo actions', () => {
   it('addTodo should create ADD_TODO action', () => {

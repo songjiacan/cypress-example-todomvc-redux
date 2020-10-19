@@ -1,4 +1,5 @@
 import {
+  LOAD_DB_TODO,
   ADD_TODO,
   CLEAR_COMPLETED,
   COMPLETE_ALL_TODOS,
@@ -10,8 +11,24 @@ import {
 // either use stub todos or an empty list
 const initialState = (window.Cypress && window.initialState) || []
 
-export default function todos (state = initialState, action) {
+export default function todos(state = initialState, action) {
   switch (action.type) {
+    case LOAD_DB_TODO:
+      console.log('This is your data from redux', action.payload)
+      return [
+        ...state,
+        ...action.payload
+        // ...action.payload.map(
+        //   todo => (
+        //     {
+        //       id: todo.id,
+        //       completed: todo.completed,
+        //       text: todo.title
+        //     }
+        //   ))
+
+      ]
+
     case ADD_TODO:
       return [
         ...state,

@@ -1,11 +1,11 @@
 /// <reference types="cypress" />
 import React from 'react'
-import Header from './Header'
+import Header from '../../../src/components/Header'
 import {mount} from 'cypress-react-unit-test'
 // we are making mini application - thus we need a store!
 import { Provider } from 'react-redux'
 import { createStore } from 'redux'
-import reducer from '../reducers'
+import reducer from '../../../src/reducers'
 const store = createStore(reducer)
 
 describe('components', () => {

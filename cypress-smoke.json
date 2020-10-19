@@ -1,6 +1,8 @@
 {
   "baseUrl": "http://localhost:1234",
+  "video": false,
   "testFiles": [
     "smoke-spec.js"
   ]
+  
 }

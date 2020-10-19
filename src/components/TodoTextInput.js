@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
+// import { fetchTodos } from '../actions/GetTodo'
 
 export default class TodoTextInput extends Component {
   static propTypes = {
@@ -12,10 +13,15 @@ export default class TodoTextInput extends Component {
   }
 
   state = {
-    text: this.props.text || ''
+    text: this.props.text || '',
+    webTodo: []
   }
 
-  handleSubmit = e => {
+  componentDidMount() {
+      this.props.getDBTodo();
+  }
+
+   handleSubmit = e => {
     const text = e.target.value.trim()
     if (e.which === 13) {
       this.props.onSave(text)

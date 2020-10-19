@@ -1,0 +1,54 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`components TodoList matches snapshot 1`] = `
+<ul
+  className="todo-list"
+>
+  <li
+    className="todo"
+  >
+    <div
+      className="view"
+    >
+      <input
+        checked={false}
+        className="toggle"
+        onChange={[Function]}
+        type="checkbox"
+      />
+      <label
+        onDoubleClick={[Function]}
+      >
+        Use Redux
+      </label>
+      <button
+        className="destroy"
+        onClick={[Function]}
+      />
+    </div>
+  </li>
+  <li
+    className="todo completed"
+  >
+    <div
+      className="view"
+    >
+      <input
+        checked={true}
+        className="toggle"
+        onChange={[Function]}
+        type="checkbox"
+      />
+      <label
+        onDoubleClick={[Function]}
+      >
+        Run the tests
+      </label>
+      <button
+        className="destroy"
+        onClick={[Function]}
+      />
+    </div>
+  </li>
+</ul>
+`;

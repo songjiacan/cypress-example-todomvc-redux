@@ -1,7 +1,7 @@
 /// <reference types="cypress" />
 import React from 'react'
-import TodoItem from './TodoItem'
-import { StoreProvider } from '../store'
+import TodoItem from '../../../src/components/TodoItem'
+import { StoreProvider } from '../../../src/store'
 import {mount} from 'cypress-react-unit-test'
 
 const setup = ( editing = false ) => {

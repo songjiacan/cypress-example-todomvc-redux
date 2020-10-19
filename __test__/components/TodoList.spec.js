@@ -1,7 +1,8 @@
 import React from 'react'
 import { createRenderer } from 'react-test-renderer/shallow';
-import TodoList from './TodoList'
-import TodoItem from './TodoItem'
+import renderer from 'react-test-renderer';
+import TodoList from '../../src/components/TodoList'
+import TodoItem from '../../src/components/TodoItem'
 
 const setup = () => {
   const props = {
@@ -37,6 +38,15 @@ const setup = () => {
 
 describe('components', () => {
   describe('TodoList', () => {
+    
+    it('matches snapshot', () => {
+      const {output , props } = setup()
+      const tree = renderer
+        .create(<TodoList {...props} />)
+        .toJSON();
+      expect(tree).toMatchSnapshot();
+    });
+
     it('should render container', () => {
       const { output } = setup()
       expect(output.type).toBe('ul')

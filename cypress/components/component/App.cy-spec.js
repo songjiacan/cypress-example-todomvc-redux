@@ -1,13 +1,13 @@
 /// <reference types="cypress" />
 // compare to App.spec.js
 import React from 'react'
-import App from './App'
+import App from '../../../src/components/App'
 import {mount} from 'cypress-react-unit-test'
 // we are making mini application - thus we need a store!
 import { Provider } from 'react-redux'
 import { createStore } from 'redux'
-import reducer from '../reducers'
-import {addTodo, completeTodo} from '../actions'
+import reducer from '../../../src/reducers'
+import {addTodo, completeTodo, setVisibilityFilter} from '../../../src/actions'
 const store = createStore(reducer)
 
 describe('components', () => {
@@ -45,4 +45,14 @@ describe('components', () => {
     cy.contains('.todo', 'write app code').should('not.have.class', 'completed')
     cy.contains('.todo', 'test components using Cypress').should('have.class', 'completed')
   })
+
+  it('should render selected todos', () => {
+    store.dispatch(setVisibilityFilter("show_completed"))
+    setup()
+
+    cy.get('.todo-list').should('have.length', 1)
+    cy.get('.todo-list').find('li').should('have.class','todo completed')
+    cy.get('.filters').contains('Completed').should('have.class', 'selected')
+  })
+
 })

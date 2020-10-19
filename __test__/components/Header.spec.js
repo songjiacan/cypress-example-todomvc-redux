@@ -1,13 +1,19 @@
 import React from 'react'
 import { createRenderer } from 'react-test-renderer/shallow';
-import Header from './Header'
-import TodoTextInput from '../components/TodoTextInput'
+import renderer from 'react-test-renderer';
+import Adapter from 'enzyme-adapter-react-16';
+import { shallow, configure } from 'enzyme';
+import Header from '../../src/components/Header'
+import TodoTextInput from '../../src/components/TodoTextInput'
+import { addTodo } from '../../src/actions'
+
+configure({adapter: new Adapter()});
 
 const setup = () => {
   const props = {
     addTodo: jest.fn()
   }
-
+  
   const renderer = createRenderer();
   renderer.render(<Header {...props} />)
   const output = renderer.getRenderOutput()
@@ -21,6 +27,16 @@ const setup = () => {
 
 describe('components', () => {
   describe('Header', () => {
+
+    it('matches snapshot', () => {
+      const {output, props } = setup()
+      const tree = renderer
+        .create(<Header {...props} />)
+        .toJSON();
+      expect(tree).toMatchSnapshot();
+
+    });
+
     it('should render correctly', () => {
       const { output } = setup()
       expect(output.type).toBe('header')
@@ -42,5 +58,24 @@ describe('components', () => {
       input.props.onSave('Use Redux')
       expect(props.addTodo).toBeCalled()
     })
+
+    test('match snapshot with enzyme', () => {
+      const {output, props } = setup()
+      
+      let component = shallow(<Header {...props}  />);
+    
+      // expect(header.text()).toEqual('Off');
+      // cy.get('header input').type('Use Redux{enter}')
+      // cy.get('@addTodo').should('have.been.called')
+      expect(component).toMatchSnapshot();
+      // expect(component.find('input').placeholder()).toEqual('');
+      // component
+      //     .find('input').get(0)
+      //     .simulate('keydown', { which: 'abc' });
+      //     // .simulate('click');    
+      // expect(props.addTodo).toHaveBeenCalled();
+      
+    });
+
   })
 })

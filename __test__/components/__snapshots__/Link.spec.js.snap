@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`component Link match snapshot with enzyme 1`] = `ShallowWrapper {}`;
+
+exports[`component Link matches snapshot 1`] = `
+<a
+  className=""
+  onClick={[Function]}
+  style={
+    Object {
+      "cursor": "pointer",
+    }
+  }
+>
+  All
+</a>
+`;

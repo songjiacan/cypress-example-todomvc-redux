@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`components TodoItem matches snapshot 1`] = `
+<li
+  className="todo"
+>
+  <div
+    className="view"
+  >
+    <input
+      checked={false}
+      className="toggle"
+      onChange={[Function]}
+      type="checkbox"
+    />
+    <label
+      onDoubleClick={[Function]}
+    >
+      Use Redux
+    </label>
+    <button
+      className="destroy"
+      onClick={[Function]}
+    />
+  </div>
+</li>
+`;
+
+exports[`components TodoItem matches snapshot by enzyme 1`] = `ShallowWrapper {}`;

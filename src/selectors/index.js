@@ -25,3 +25,9 @@ export const getCompletedTodoCount = createSelector(
   todos =>
     todos.reduce((count, todo) => (todo.completed ? count + 1 : count), 0)
 )
+
+export const getMaxId = createSelector(
+  [getTodos],
+  todos =>
+    todos.reduce((maxId, todo) => Math.max(todo.id, maxId), -1) + 1
+)

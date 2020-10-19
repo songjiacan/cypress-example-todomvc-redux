@@ -1,13 +1,13 @@
 /// <reference types="cypress" />
 // compare to tests in "Footer.spec.js"
 import React from 'react'
-import Footer from './Footer'
+import Footer from '../../../src/components/Footer'
 import { mount } from 'cypress-react-unit-test'
 
 // we are making mini application - thus we need a store!
 import { Provider } from 'react-redux'
 import { createStore } from 'redux'
-import reducer from '../reducers'
+import reducer from '../../../src/reducers'
 const store = createStore(reducer)
 
 const setup = propOverrides => {

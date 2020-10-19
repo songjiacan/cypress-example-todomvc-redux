@@ -1,6 +1,10 @@
 import React from 'react'
 import { createRenderer } from 'react-test-renderer/shallow';
-import TodoTextInput from './TodoTextInput'
+import TodoTextInput from '../../src/components/TodoTextInput'
+import Adapter from 'enzyme-adapter-react-16';
+import { shallow, configure } from 'enzyme';
+
+configure({adapter: new Adapter()});
 
 const setup = propOverrides => {
   const props = Object.assign({
@@ -76,5 +80,26 @@ describe('components', () => {
       output.props.onBlur({ target: { value: 'Use Redux' } })
       expect(props.onSave).not.toBeCalled()
     })
+
+    // it('simulate input change event verify assign fn be called ', () => {
+
+    //   const props = {
+    //     onSave: jest.fn(),
+    //     text: 'Use Redux',
+    //     placeholder: 'What needs to be done?',
+    //     editing: false,
+    //     newTodo: false
+    //   }
+
+    //   const wrapper = shallow(<TodoTextInput {...props} />);
+    //   const event = {
+    //     which: 13,
+    //     preventDefault() {},
+    //     target: { name: 'onSave', value: 'custom value' }
+    //   };
+    //   wrapper.find('input').simulate('change', event);
+    //   expect(props.onSave).toBeCalledWith(0);
+     
+    // });
   })
 })

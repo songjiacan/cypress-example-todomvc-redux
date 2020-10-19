@@ -1,8 +1,30 @@
 import React from 'react'
 import { createRenderer } from 'react-test-renderer/shallow';
-import MainSection from './MainSection'
-import Footer from './Footer'
-import VisibleTodoList from '../containers/VisibleTodoList'
+import { Provider } from 'react-redux'
+import configureMockStore from "redux-mock-store";
+import renderer from 'react-test-renderer';
+import MainSection from '../../src/components/MainSection'
+import Footer from '../../src/components/Footer'
+import VisibleTodoList from '../../src/containers/VisibleTodoList'
+import { setVisibilityFilter } from '../../src/actions'
+import Adapter from 'enzyme-adapter-react-16';
+import { mount, shallow, configure } from 'enzyme';
+// import { spy } from 'sinon';
+
+configure({adapter: new Adapter()});
+
+const mockStore = configureMockStore();
+const store = mockStore({});
+
+
+// spy(MainSection.prototype, 'componentDidMount');
+
+// describe('<MainSection />', () => {
+//   it('calls componentDidMount', () => {
+//     const wrapper = mount(<MainSection />);
+//     expect(MainSection.prototype.componentDidMount).to.have.property('callCount', 1);
+//   });
+// });
 
 const setup = propOverrides => {
   const props = Object.assign({
@@ -30,6 +52,22 @@ const setup = propOverrides => {
 
 describe('components', () => {
   describe('MainSection', () => {
+
+    it('matches snapshot by shallow', () => {
+      store.dispatch(setVisibilityFilter("show_all"))
+      const {output , props } = setup()
+
+        //shallow  renderer.create
+        const component = shallow(
+          <Provider store={store}>
+           <MainSection {...props} />
+          </Provider>
+        );
+         
+        expect(component).toMatchSnapshot();
+        // expect(wrapper).toMatchSnapshot();
+    });
+
     it('should render container', () => {
       const { output } = setup()
       expect(output.type).toBe('section')
@@ -99,5 +137,20 @@ describe('components', () => {
         expect(renderedChildren[0].type).toBe(VisibleTodoList)
       })
     })
+
+    // it('matches snapshot', () => {
+      
+    //   store.dispatch(setVisibilityFilter("show_all"))
+    //   const {output , props } = setup()
+    //   const tree = renderer
+    //     .create(
+    //       <Provider store={store}>
+    //         <MainSection {...props} />
+    //       </Provider>
+    //     )
+    //     .toJSON();
+    //   expect(tree).toMatchSnapshot();
+    // });
+
   })
 })

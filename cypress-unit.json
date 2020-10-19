@@ -7,5 +7,6 @@
   "viewportWidth": 300,
   "viewportHeight": 300,
   "experimentalComponentTesting": true,
-  "componentFolder": "src/components"
+  "video": false,
+  "componentFolder": "cypress/components"
 }

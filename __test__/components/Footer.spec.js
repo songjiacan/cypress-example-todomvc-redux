@@ -1,8 +1,16 @@
 import React from 'react'
 import { createRenderer } from 'react-test-renderer/shallow';
-import Footer from './Footer'
-import FilterLink from '../containers/FilterLink'
-import { SHOW_ALL, SHOW_ACTIVE, SHOW_COMPLETED } from '../constants/TodoFilters'
+import renderer from 'react-test-renderer';
+import { Provider } from 'react-redux'
+import configureMockStore from "redux-mock-store";
+// import { createStore } from 'redux'
+import Footer from '../../src/components/Footer'
+import FilterLink from '../../src/containers/FilterLink'
+import { SHOW_ALL, SHOW_ACTIVE, SHOW_COMPLETED } from '../../src/constants/TodoFilters'
+
+
+const mockStore = configureMockStore();
+const store = mockStore({});
 
 const setup = propOverrides => {
   const props = Object.assign({
@@ -12,6 +20,9 @@ const setup = propOverrides => {
   }, propOverrides)
 
   const renderer = createRenderer()
+  /**
+     * Similar to `ReactDOM.render` but it doesn't require DOM and only renders a single level deep.
+   */
   renderer.render(<Footer {...props} />)
   const output = renderer.getRenderOutput()
 
@@ -34,6 +45,19 @@ const getTextContent = elem => {
 
 describe('components', () => {
   describe('Footer', () => {
+
+    it('matches snapshot', () => {
+      const {output , props } = setup()
+      const tree = renderer
+        .create(
+          <Provider store={store}>
+          <Footer {...props} />
+          </Provider>
+        )
+        .toJSON();
+      expect(tree).toMatchSnapshot();
+    });
+
     it('should render container', () => {
       const { output } = setup()
       expect(output.type).toBe('footer')
